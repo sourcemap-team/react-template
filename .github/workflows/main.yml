@@ -1,0 +1,25 @@
+name: GitHub Actions Demo
+on: [push, pull_request]
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install modules
+        run: yarn install
+      - name: build production project
+        run: yarn run build:prod
+      - name: linting typescript
+        run: yarn run lint:ts
+      - name: linting scss
+        run: yarn run lint:scss
+      - name: unit testing
+        run: yarn run unit
