@@ -21,5 +21,3 @@ jobs:
         run: yarn run lint:ts
       - name: linting scss
         run: yarn run lint:scss
-      - name: unit testing
-        run: yarn run unit

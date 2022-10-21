@@ -1,17 +1,18 @@
 import React from 'react';
 
+import { StoreProvider } from 'app/providers/StoreProvider';
 import { ErrorBoundary } from './ErrorBoundary';
 import { RouterProvider } from './RouterProvider';
-import { ThemeProvider } from './ThemeProvider';
 
 const withProviders = <P extends object>(Component: React.ComponentType<P>) => (props: P) => (
-    <RouterProvider>
-        <ErrorBoundary>
-            <ThemeProvider>
+    <ErrorBoundary>
+        <StoreProvider>
+            <RouterProvider>
                 <Component {...props} />
-            </ThemeProvider>
-        </ErrorBoundary>
-    </RouterProvider>
+            </RouterProvider>
+        </StoreProvider>
+    </ErrorBoundary>
+
 );
 
 export default withProviders;

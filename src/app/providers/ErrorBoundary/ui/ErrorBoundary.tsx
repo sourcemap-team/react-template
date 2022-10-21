@@ -1,5 +1,9 @@
 import React, { ErrorInfo, ReactNode } from 'react';
 
+import { ErrorPage } from 'pages/ErrorPage';
+
+import { Layout } from 'shared/ui/Layout/Layout';
+
 interface ErrorBoundaryProps {
   children: ReactNode
 }
@@ -27,7 +31,11 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
         const { children } = this.props;
 
         if (hasError) {
-            return <h1>Something went wrong.</h1>;
+            return (
+                <Layout.Additional>
+                    <ErrorPage />
+                </Layout.Additional>
+            );
         }
 
         return children;

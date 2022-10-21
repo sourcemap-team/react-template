@@ -5,5 +5,4 @@ const MainPage = () => (
         MainPage
     </div>
 );
-
 export default MainPage;

@@ -1,26 +1,17 @@
-import React, { FC, Suspense } from 'react';
-import cn from 'classnames';
+import React, { Suspense } from 'react';
 
-import { Navbar } from 'widgets/Navbar';
-import { useTheme } from 'shared/lib/theme/useTheme';
-import withProviders from './providers';
 import { AppRoutes } from './settings';
 
-import 'shared/config/i18n/i18n';
+import withProviders from './providers';
 
 import './styles/index.scss';
 
-const App: FC = () => {
-    const { theme } = useTheme();
-
-    return (
+const App = () => (
+    <div className="app">
         <Suspense fallback="">
-            <div className={cn('app', theme)}>
-                <Navbar />
-                <AppRoutes />
-            </div>
+            <AppRoutes />
         </Suspense>
-    );
-};
+    </div>
+);
 
 export default withProviders(App);

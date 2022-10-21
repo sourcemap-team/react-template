@@ -1,0 +1,23 @@
+.layout {
+  margin-left: 200px;
+}
+
+.sider {
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.content {
+  padding: 16px 32px;
+  min-height: 100vh;
+}
+
+.additional {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
