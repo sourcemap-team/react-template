@@ -1,1 +1,1 @@
-export { userSlice, userReducer, userActions } from './model';
+export { User, UserSchema, getUserData, IJWTDecode } from "./model";

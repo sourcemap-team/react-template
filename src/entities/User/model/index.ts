@@ -1,2 +1,2 @@
-export { userSlice, userReducer, userActions } from './slice/userSlice';
-export { User, UserSchema } from './types/user';
+export { User, IJWTDecode, UserSchema } from "./types/user";
+export { getUserData } from "./selectors/userSelectors";

@@ -1,14 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import cn from 'classnames';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { APP_ROUTES } from 'shared/config/routes';
+import { AppstoreOutlined } from "@ant-design/icons";
 
-import styles from './Navbar.module.scss';
+import { APP_ROUTES } from "shared/config/routes";
+
+import styles from "./Navbar.module.scss";
+
+const links = [
+  {
+    name: "Dashboard",
+    to: APP_ROUTES.INDEX,
+    icon: <AppstoreOutlined />,
+  },
+];
 
 export const Navbar = () => (
-    <div className={cn(styles.container)}>
-        <Link to={APP_ROUTES.INDEX}>Main</Link>
-        <Link to={APP_ROUTES.LOGIN}>Login</Link>
+  <div className={styles.container}>
+    <div className={styles.logoContainer}>
+      <h2 className={styles.logo}>Admin.</h2>
     </div>
+    {links.map((link) => (
+      <Link key={link.name} to={link.to} className={styles.link}>
+        <span className={styles.linkIcon}>{link.icon}</span>
+        {link.name}
+      </Link>
+    ))}
+  </div>
 );

@@ -1,65 +1,76 @@
-import React from 'react';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Checkbox, Form, Input } from "antd";
+import { useDispatch } from "react-redux";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+
 import {
-    Button, Form, Input,
-} from 'antd';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+  authActions,
+  LoginSchema,
+  useLoginMutation,
+} from "features/auth/auth-by-username/model";
 
-import { LoginSchema, useLoginUserMutation } from 'features/auth/auth-by-username';
+import { APP_ROUTES } from "shared/config/routes";
+import usePersist from "shared/lib/hooks/usePersist";
 
-import { APP_ROUTES } from 'shared/config/routes';
-
-import styles from './LoginForm.module.scss';
+import styles from "./LoginForm.module.scss";
 
 export const LoginForm = () => {
-    const [loginUser, { isLoading }] = useLoginUserMutation();
-    const onFinish = (values: LoginSchema) => {
-        loginUser(values);
-    };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [login, { isLoading }] = useLoginMutation();
+  const [persist, setPersist] = usePersist();
 
-    return (
-        <Form
-            name="login"
-            className={styles.form}
-            onFinish={onFinish}
+  const onFinish = async (values: LoginSchema) => {
+    try {
+      const { accessToken } = await login(values).unwrap();
+      dispatch(authActions.setCredentials({ accessToken }));
+      navigate(APP_ROUTES.HOME);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleChangePersist = () => {
+    setPersist(!persist);
+  };
+
+  return (
+    <Form name="login" className={styles.form} onFinish={onFinish}>
+      <Form.Item
+        name="email"
+        rules={[{ required: true, message: "Please input your Username!" }]}
+      >
+        <Input prefix={<UserOutlined />} placeholder="Username" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[{ required: true, message: "Please input your Password!" }]}
+      >
+        <Input
+          prefix={<LockOutlined />}
+          type="password"
+          placeholder="Password"
+        />
+      </Form.Item>
+      <Form.Item>
+        <Button
+          type="primary"
+          htmlType="submit"
+          className={styles.button}
+          loading={isLoading}
         >
-            <Form.Item
-                name="username"
-                rules={[{ required: true, message: 'Please input your Username!' }]}
-            >
-                <Input
-                    prefix={<UserOutlined />}
-                    placeholder="Username"
-                />
-            </Form.Item>
-            <Form.Item
-                name="password"
-                rules={[{ required: true, message: 'Please input your Password!' }]}
-            >
-                <Input
-                    prefix={<LockOutlined />}
-                    type="password"
-                    placeholder="Password"
-                />
-            </Form.Item>
-            <Form.Item>
-                <Button
-                    type="primary"
-                    htmlType="submit"
-                    className={styles.button}
-                    loading={isLoading}
-                >
-                    Log in
-                </Button>
-
-            </Form.Item>
-
-            <Form.Item>
-                <Link to={APP_ROUTES.FORGOT}>
-                    Forgot password
-                </Link>
-                <Link to={APP_ROUTES.REGISTER} className={styles.register}>Register</Link>
-            </Form.Item>
-        </Form>
-    );
+          Log in
+        </Button>
+      </Form.Item>
+      <Form.Item>
+        <Checkbox checked={persist} onClick={handleChangePersist}>
+          Remember me
+        </Checkbox>
+        <Link to={APP_ROUTES.FORGOT} className={styles.forgot}>
+          Forgot password
+        </Link>
+      </Form.Item>
+    </Form>
+  );
 };

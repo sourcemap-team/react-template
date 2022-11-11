@@ -1,4 +1,6 @@
-* {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -14,4 +16,17 @@ textarea,
 select {
   margin: 0;
   font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p {
+  color: inherit;
+  margin: 0;
+  padding: 0;
 }

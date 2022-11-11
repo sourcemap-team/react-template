@@ -1,8 +1,15 @@
 export interface User {
-  username: string
-  token: string
+  email: string;
+  roles: string[];
+  firstName: string;
+  lastName: string;
+  isAdmin: boolean;
+  isManager: boolean;
+  status: string;
 }
 
-export interface UserSchema {
-  authData?: User
+export interface IJWTDecode {
+  UserInfo: User;
 }
+
+export interface UserSchema extends User {}

@@ -1,0 +1,60 @@
+.container {
+  width: 100%;
+  padding: 15px 40px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.notifications {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  margin-right: 25px;
+  font-size: 18px;
+  color: gray;
+}
+
+.name {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--text-color);
+  margin-left: 10px;
+  opacity: 0.6;
+  user-select: none;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.line {
+  margin-top: 15px;
+  height: 1px;
+  background-color: var(--line-color);
+  border: none;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menuItem {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.menu {
+  border: 1px solid transparent;
+  border-radius: 40px;
+}
